@@ -12,6 +12,6 @@ Create and configure a task for "maven package".
 If the build succeeds, the output files will be in target/
 
 # Permissions
-nedc.reload - Needed to do /reload.
-nedc.save - Needed to do /save.
-nedc.bypass - Nedded if you want to bypass the check.
+- nedc.reload - Needed to do /reload.
+- nedc.save - Needed to do /save.
+- nedc.bypass - Nedded if you want to bypass the check.
