@@ -14,4 +14,4 @@ If the build succeeds, the output files will be in target/
 # Permissions
 - nedc.reload - Needed to do /reload.
 - nedc.save - Needed to do /save.
-- nedc.bypass - Nedded if you want to bypass the check.
+- nedc.bypass - Needed if you want to bypass the check.
