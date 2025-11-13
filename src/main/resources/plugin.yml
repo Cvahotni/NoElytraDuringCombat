@@ -1,0 +1,14 @@
+name: NoElytraDuringCombat
+version: '1.0-SNAPSHOT'
+main: me.spectral8420.noElytraDuringCombat.NoElytraDuringCombat
+api-version: '1.21'
+authors: [ ____Spectral)____ ]
+description: Disables Elytra usage during combat.
+
+commands:
+  nedcreload:
+    description: "Reloads all configs"
+    permission: "nedc.reload"
+  nedcsave:
+    description: "Saves all configs"
+    permission: "nedc.save"
