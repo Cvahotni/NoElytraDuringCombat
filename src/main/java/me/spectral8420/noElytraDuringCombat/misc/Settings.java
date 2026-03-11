@@ -3,28 +3,42 @@ package me.spectral8420.noElytraDuringCombat.misc;
 import me.spectral8420.noElytraDuringCombat.config.CustomConfig;
 import me.spectral8420.noElytraDuringCombat.config.CustomConfigManager;
 import me.spectral8420.noElytraDuringCombat.helper.ConsoleHelper;
-import org.bukkit.ChatColor;
+import net.md_5.bungee.api.ChatColor;
 
 public class Settings {
     private static int combatTimeInSeconds = 30;
+    private static double notifyInterval = 5.0;
 
     public static void getData() {
-        CustomConfig langConfig = CustomConfigManager.getConfig("settings");
+        CustomConfig settingsConfig = CustomConfigManager.getConfig("settings");
 
-        if(!langConfig.has("combatTimeInSeconds")) {
-            ConsoleHelper.sendMessage(ChatColor.RED + "Settings does not have the required variables, reverting!");
-            return;
+        try {
+            if(settingsConfig.has("combatTimeInSeconds")) {
+                combatTimeInSeconds = (int) settingsConfig.get("combatTimeInSeconds");
+            }
+
+            if(settingsConfig.has("notifyInterval")) {
+                notifyInterval = (double) settingsConfig.get("notifyInterval");
+            }
         }
 
-        combatTimeInSeconds = (int) langConfig.get("combatTimeInSeconds");
+        catch(Exception e) {
+            ConsoleHelper.sendMessage(ChatColor.RED + "Exception whilst loading settings: " + e);
+        }
     }
 
     public static void setData() {
         CustomConfig langConfig = CustomConfigManager.getConfig("settings");
+
         langConfig.set("combatTimeInSeconds", combatTimeInSeconds);
+        langConfig.set("notifyInterval", notifyInterval);
     }
 
     public static int getCombatTimeInSeconds() {
         return combatTimeInSeconds;
+    }
+
+    public static double getNotifyInterval() {
+        return notifyInterval;
     }
 }

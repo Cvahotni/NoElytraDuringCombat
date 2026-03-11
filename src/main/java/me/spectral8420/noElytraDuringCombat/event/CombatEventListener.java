@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 
 public class CombatEventListener implements Listener {
     @EventHandler
@@ -24,5 +25,14 @@ public class CombatEventListener implements Listener {
 
         CombatTimeTracker.addTimeLeft(victim.getUniqueId(), Settings.getCombatTimeInSeconds());
         CombatTimeTracker.addTimeLeft(attacker.getUniqueId(), Settings.getCombatTimeInSeconds());
+    }
+
+    @EventHandler
+    public void onDeath(PlayerDeathEvent event) {
+        Player victim = event.getEntity();
+
+        if(CombatTimeTracker.containsTimeLeft(victim.getUniqueId())) {
+            CombatTimeTracker.removeTimeLeft(victim.getUniqueId());
+        }
     }
 }
