@@ -1,6 +1,9 @@
 # No Elytra During Combat (N.E.D.C)
 A small plugin to disable Elytra usage during combat.
 
+# Demonstration
+https://www.youtube.com/watch?v=_BgBQcQClWw
+
 # Installation
 - You can find the pre-built binary at https://github.com/Cvahotni/NoElytraDuringCombat/releases
 - Currently supports PaperMC versions 1.21+.
