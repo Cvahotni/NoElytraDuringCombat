@@ -2,6 +2,8 @@ package me.spectral8420.noElytraDuringCombat.misc;
 
 import me.spectral8420.noElytraDuringCombat.config.CustomConfig;
 import me.spectral8420.noElytraDuringCombat.config.CustomConfigManager;
+import me.spectral8420.noElytraDuringCombat.helper.ConsoleHelper;
+import org.bukkit.ChatColor;
 
 import java.util.HashMap;
 
@@ -11,14 +13,20 @@ public class Lang {
     public static void getData() {
         CustomConfig langConfig = CustomConfigManager.getConfig("lang");
 
-        addMessage("prefix", (String) langConfig.get("prefix"));
-        addMessage("glideCancel", (String) langConfig.get("glideCancel"));
-        addMessage("reload", (String) langConfig.get("reload"));
-        addMessage("save", (String) langConfig.get("save"));
+        addMessage("prefix", langConfig);
+        addMessage("glideCancel", langConfig);
+        addMessage("reload", langConfig);
+        addMessage("save", langConfig);
     }
 
-    public static void addMessage(String key, String message) {
-        messages.put(key, message);
+    public static void addMessage(String key, CustomConfig langConfig) {
+        try {
+            messages.put(key, (String) langConfig.get(key));
+        }
+
+        catch (Exception e) {
+            ConsoleHelper.sendMessage(ChatColor.RED + "Failed to find message due to an exception: " + e);
+        }
     }
 
     public static String getMessage(String key, boolean includePrefix) {
