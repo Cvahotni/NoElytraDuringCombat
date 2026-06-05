@@ -6,7 +6,7 @@ A small plugin to disable Elytra usage during combat.
 
 # Installation
 - You can find the pre-built binary at https://github.com/Cvahotni/NoElytraDuringCombat/releases
-- Currently supports PaperMC versions 1.21+.
+- Currently supports Spigot and Paper versions 1.21+.
 
 # Building
 - Clone the repository to your folder
