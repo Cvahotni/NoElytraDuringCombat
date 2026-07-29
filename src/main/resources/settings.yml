@@ -1,2 +1,9 @@
+#How many seconds should the combat timer for the affected player last?
 combatTimeInSeconds: 30
+
+#How often should the affected player be notified that they aren't allowed to use their Elytra?
 notifyInterval: 5.0
+
+#Should we integrate with CombatLogX if it was found and working?
+#combatTimeInSeconds is overridden by CombatLogX's configured combat time if this is enabled.
+integrateWithCombatLogX: true

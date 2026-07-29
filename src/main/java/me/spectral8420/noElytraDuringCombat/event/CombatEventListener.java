@@ -1,6 +1,8 @@
 package me.spectral8420.noElytraDuringCombat.event;
 
 import me.spectral8420.noElytraDuringCombat.combat.CombatTimeTracker;
+import me.spectral8420.noElytraDuringCombat.compatibility.CombatLogXCompatibility;
+import me.spectral8420.noElytraDuringCombat.compatibility.Compatibility;
 import me.spectral8420.noElytraDuringCombat.misc.Settings;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -23,8 +25,14 @@ public class CombatEventListener implements Listener {
             CombatTimeTracker.removeTimeLeft(victim.getUniqueId());
         }
 
-        CombatTimeTracker.addTimeLeft(victim.getUniqueId(), Settings.getCombatTimeInSeconds());
-        CombatTimeTracker.addTimeLeft(attacker.getUniqueId(), Settings.getCombatTimeInSeconds());
+        int combatTimeInSeconds = Settings.getCombatTimeInSeconds();
+
+        if(Settings.isIntegrateWithCombatLogX() && Compatibility.isCombatLogXEnabled()) {
+            combatTimeInSeconds = CombatLogXCompatibility.getAPI().getConfiguration().getDefaultTimer();
+        }
+
+        CombatTimeTracker.addTimeLeft(victim.getUniqueId(), combatTimeInSeconds);
+        CombatTimeTracker.addTimeLeft(attacker.getUniqueId(), combatTimeInSeconds);
     }
 
     @EventHandler

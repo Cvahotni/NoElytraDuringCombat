@@ -8,6 +8,7 @@ import net.md_5.bungee.api.ChatColor;
 public class Settings {
     private static int combatTimeInSeconds = 30;
     private static double notifyInterval = 5.0;
+    private static boolean integrateWithCombatLogX = true;
 
     public static void getData() {
         CustomConfig settingsConfig = CustomConfigManager.getConfig("settings");
@@ -19,6 +20,10 @@ public class Settings {
 
             if(settingsConfig.has("notifyInterval")) {
                 notifyInterval = (double) settingsConfig.get("notifyInterval");
+            }
+
+            if(settingsConfig.has("integrateWithCombatLogX")) {
+                integrateWithCombatLogX = (boolean) settingsConfig.get("integrateWithCombatLogX");
             }
         }
 
@@ -40,5 +45,9 @@ public class Settings {
 
     public static double getNotifyInterval() {
         return notifyInterval;
+    }
+
+    public static boolean isIntegrateWithCombatLogX() {
+        return integrateWithCombatLogX;
     }
 }
