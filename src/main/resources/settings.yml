@@ -1,8 +1,20 @@
 #How many seconds should the combat timer for the affected player last?
 combatTimeInSeconds: 30
 
+#How many seconds should the firework cooldown for Elytra users last?
+fireWorkCooldownInSeconds: 15
+
 #How often should the affected player be notified that they aren't allowed to use their Elytra?
 notifyInterval: 5.0
+
+#Should we apply a firework cooldown too to Elytra users? If so, please set the value below to true.
+useFireworkCooldown: false
+
+#Should we display a bossbar for the combat cooldown at the top of the screen?
+displayCombatCooldownBossBar: true
+
+#Should we display a bossbar for the firework cooldown at the top of the screen?
+displayFireworkCooldownBossBar: true
 
 #Should we integrate with CombatLogX if it was found and working?
 #combatTimeInSeconds is overridden by CombatLogX's configured combat time if this is enabled.

@@ -7,5 +7,6 @@ public class EventManager {
     public static void registerEvents(NoElytraDuringCombat plugin) {
         Bukkit.getServer().getPluginManager().registerEvents(new CombatEventListener(), plugin);
         Bukkit.getServer().getPluginManager().registerEvents(new ElytraEventListener(), plugin);
+        Bukkit.getServer().getPluginManager().registerEvents(new FireworkEventListener(), plugin);
     }
 }

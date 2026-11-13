@@ -1,10 +1,11 @@
 package me.spectral8420.noElytraDuringCombat;
 
-import me.spectral8420.noElytraDuringCombat.combat.CombatTimeTracker;
+import me.spectral8420.noElytraDuringCombat.combat.TimeTracker;
 import me.spectral8420.noElytraDuringCombat.command.CustomCommandManager;
 import me.spectral8420.noElytraDuringCombat.compatibility.Compatibility;
 import me.spectral8420.noElytraDuringCombat.config.CustomConfigManager;
 import me.spectral8420.noElytraDuringCombat.event.EventManager;
+import me.spectral8420.noElytraDuringCombat.helper.BossBarHelper;
 import me.spectral8420.noElytraDuringCombat.helper.ConsoleHelper;
 import me.spectral8420.noElytraDuringCombat.misc.Lang;
 import me.spectral8420.noElytraDuringCombat.misc.Settings;
@@ -24,7 +25,7 @@ public final class NoElytraDuringCombat extends JavaPlugin {
         Lang.getData();
         Settings.getData();
 
-        CombatTimeTracker.startTask(this);
+        TimeTracker.startTask(this);
         ConsoleHelper.sendMessage(ChatColor.GREEN + "NoElytraDuringCombat has been enabled!");
 
         Bukkit.getScheduler().runTask(this, () -> {
@@ -38,6 +39,7 @@ public final class NoElytraDuringCombat extends JavaPlugin {
     public void onDisable() {
         Settings.setData();
         CustomConfigManager.save();
+        BossBarHelper.cleanUp();
 
         ConsoleHelper.sendMessage(ChatColor.RED + "NoElytraDuringCombat has been disabled!");
     }

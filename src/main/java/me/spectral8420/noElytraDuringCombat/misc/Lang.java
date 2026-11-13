@@ -15,13 +15,31 @@ public class Lang {
 
         addMessage("prefix", langConfig);
         addMessage("glideCancel", langConfig);
+        addMessage("fireworkCancel", langConfig);
+        addMessage("glideTimerDone", langConfig);
+        addMessage("fireworkTimerDone", langConfig);
         addMessage("reload", langConfig);
         addMessage("save", langConfig);
+        addMessage("combatCooldownBossBar", langConfig);
+        addMessage("fireworkCooldownBossBar", langConfig);
     }
 
     public static void addMessage(String key, CustomConfig langConfig) {
         try {
-            messages.put(key, (String) langConfig.get(key));
+            if(!langConfig.has(key)) {
+                ConsoleHelper.sendMessage(
+                        ChatColor.RED +
+                                "Unable to find language key in lang.yml for " + key +
+                                ", to fix this, please update the lang.yml file, " +
+                                "add the key and value to it, or delete the lang.yml file to refresh it."
+                );
+
+                messages.put(key, key);
+            }
+
+            else {
+                messages.put(key, (String) langConfig.get(key));
+            }
         }
 
         catch (Exception e) {
@@ -30,7 +48,20 @@ public class Lang {
     }
 
     public static String getMessage(String key, boolean includePrefix) {
-        if(!messages.containsKey(key)) return key;
-        return includePrefix ? messages.get("prefix") + messages.get(key) : messages.get(key);
+        if(!messages.containsKey(key)) {
+            return key;
+        }
+
+        String foundMessage = messages.get(key);
+
+        if(foundMessage == null) {
+            return key;
+        }
+
+        if(foundMessage.isEmpty()) {
+            return key;
+        }
+
+        return includePrefix ? messages.get("prefix") + foundMessage : foundMessage;
     }
 }

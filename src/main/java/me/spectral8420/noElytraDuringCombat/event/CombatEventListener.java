@@ -1,6 +1,6 @@
 package me.spectral8420.noElytraDuringCombat.event;
 
-import me.spectral8420.noElytraDuringCombat.combat.CombatTimeTracker;
+import me.spectral8420.noElytraDuringCombat.combat.TimeTracker;
 import me.spectral8420.noElytraDuringCombat.compatibility.CombatLogXCompatibility;
 import me.spectral8420.noElytraDuringCombat.compatibility.Compatibility;
 import me.spectral8420.noElytraDuringCombat.misc.Settings;
@@ -21,8 +21,8 @@ public class CombatEventListener implements Listener {
             return;
         }
 
-        if(CombatTimeTracker.containsTimeLeft(victim.getUniqueId())) {
-            CombatTimeTracker.removeTimeLeft(victim.getUniqueId());
+        if(TimeTracker.containsCombatTimeLeft(victim.getUniqueId())) {
+            TimeTracker.removeCombatTimeLeft(victim.getUniqueId());
         }
 
         int combatTimeInSeconds = Settings.getCombatTimeInSeconds();
@@ -31,16 +31,16 @@ public class CombatEventListener implements Listener {
             combatTimeInSeconds = CombatLogXCompatibility.getAPI().getConfiguration().getDefaultTimer();
         }
 
-        CombatTimeTracker.addTimeLeft(victim.getUniqueId(), combatTimeInSeconds);
-        CombatTimeTracker.addTimeLeft(attacker.getUniqueId(), combatTimeInSeconds);
+        TimeTracker.addCombatTimeLeft(victim.getUniqueId(), combatTimeInSeconds);
+        TimeTracker.addCombatTimeLeft(attacker.getUniqueId(), combatTimeInSeconds);
     }
 
     @EventHandler
     public void onDeath(PlayerDeathEvent event) {
         Player victim = event.getEntity();
 
-        if(CombatTimeTracker.containsTimeLeft(victim.getUniqueId())) {
-            CombatTimeTracker.removeTimeLeft(victim.getUniqueId());
+        if(TimeTracker.containsCombatTimeLeft(victim.getUniqueId())) {
+            TimeTracker.removeCombatTimeLeft(victim.getUniqueId());
         }
     }
 }

@@ -1,6 +1,6 @@
 package me.spectral8420.noElytraDuringCombat.event;
 
-import me.spectral8420.noElytraDuringCombat.combat.CombatTimeTracker;
+import me.spectral8420.noElytraDuringCombat.combat.TimeTracker;
 import me.spectral8420.noElytraDuringCombat.misc.Lang;
 import me.spectral8420.noElytraDuringCombat.misc.Settings;
 import org.bukkit.entity.Player;
@@ -16,7 +16,7 @@ public class ElytraEventListener implements Listener {
             return;
         }
 
-        if(!CombatTimeTracker.containsTimeLeft(player.getUniqueId())) {
+        if(!TimeTracker.containsCombatTimeLeft(player.getUniqueId())) {
             return;
         }
 
@@ -26,9 +26,11 @@ public class ElytraEventListener implements Listener {
             return;
         }
 
-        if(!CombatTimeTracker.containsMessageTimeLeft(player.getUniqueId())) {
-            player.sendMessage(Lang.getMessage("glideCancel", true));
-            CombatTimeTracker.addMessageTimeLeft(player.getUniqueId(), Settings.getNotifyInterval());
+        double combatTimeLeft = TimeTracker.getCombatTimeLeft(player.getUniqueId());
+
+        if(!TimeTracker.containsCombatMessageTimeLeft(player.getUniqueId())) {
+            player.sendMessage(Lang.getMessage("glideCancel", true).replace("{time}", "" + (int) combatTimeLeft));
+            TimeTracker.addCombatMessageTimeLeft(player.getUniqueId(), Settings.getNotifyInterval());
         }
 
         player.setGliding(false);
@@ -38,7 +40,7 @@ public class ElytraEventListener implements Listener {
     public void onPlayerMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
 
-        if(!CombatTimeTracker.containsTimeLeft(player.getUniqueId())) {
+        if(!TimeTracker.containsCombatTimeLeft(player.getUniqueId())) {
             return;
         }
 
@@ -49,9 +51,9 @@ public class ElytraEventListener implements Listener {
         }
 
         if(player.isGliding()) {
-            if(!CombatTimeTracker.containsMessageTimeLeft(player.getUniqueId())) {
+            if(!TimeTracker.containsCombatMessageTimeLeft(player.getUniqueId())) {
                 player.sendMessage(Lang.getMessage("glideCancel", true));
-                CombatTimeTracker.addMessageTimeLeft(player.getUniqueId(), Settings.getNotifyInterval());
+                TimeTracker.addCombatMessageTimeLeft(player.getUniqueId(), Settings.getNotifyInterval());
             }
 
             player.setGliding(false);
